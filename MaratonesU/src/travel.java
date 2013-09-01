@@ -2,7 +2,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.InputStreamReader;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -52,7 +51,7 @@ public class travel
 			//---------------------------------------------
 
 			rta=(primero)?rta:"\n"+rta;
-			System.out.print(rta.replace(',','.'));
+			System.out.print(rta);
 			linea = br.readLine();
 			if (primero)primero=false;
 		}
@@ -100,11 +99,18 @@ public class travel
 		while (!pq.isEmpty()) relaxArcos(pq,distTo,edgeTo,pq.poll(),grafo.adj());
 
 		Double distancia = distTo[destino];
-		if(distancia==null || distancia==Double.POSITIVE_INFINITY) return "-1.00000";
+		if(distancia==Double.POSITIVE_INFINITY) return "-1.00000";
 		else
 		{
-			DecimalFormat df = new DecimalFormat("0.00000");
-			return df.format(distancia);
+			String[] aux=(distancia+"").split("\\.");
+			char[] numDescimales=aux[1].toCharArray();
+			String decimales="";
+			for (int i = 0; i < 5; i++)
+			{
+				if(i<numDescimales.length)decimales+=numDescimales[i];
+				else decimales+='0';
+			}
+			return aux[0]+'.'+decimales;
 		}
 	}
 
