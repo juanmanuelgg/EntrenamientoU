@@ -6,20 +6,22 @@ import java.io.InputStreamReader;
 
 public class Score
 {
+	private static boolean test = false;
 	private static BufferedReader br;
-
-	private static boolean primero = true;
-	private static boolean test = false;//TODO Cambiar
 
 	public static void main(String[] args) throws Exception 
 	{
-		if(test)br=new BufferedReader(new FileReader(new File("./data/Score/Test.in")));
+		if(test)br=new BufferedReader(new FileReader(new File("./data/scoreTest.in")));
 		else br=new BufferedReader(new InputStreamReader(System.in));
+		
 		solucionarProblem();
+	
+		br.close();
 	}
 
 	private static void solucionarProblem() throws IOException 
 	{
+		boolean primero = true;
 		String line=br.readLine();
 		while(line!=null)
 		{

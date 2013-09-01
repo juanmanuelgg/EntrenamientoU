@@ -16,7 +16,7 @@ public class Esqueleto
 	
 	public static void main(String[] args) throws Exception 
 	{
-		if(test)br=new BufferedReader(new FileReader(new File("./data/Esqueleto/Test.in")));
+		if(test)br=new BufferedReader(new FileReader(new File("./data/EsqueletoTest.in")));
 		else br=new BufferedReader(new InputStreamReader(System.in));
 		solucionarProblema3();
 	}

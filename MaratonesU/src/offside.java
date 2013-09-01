@@ -7,17 +7,19 @@ import java.util.Arrays;
 
 public class offside
 {
+	private static boolean test=true;
 	private static BufferedReader br;
 
 	private static final String LINEA_FINAL = "0 0";	
-	private static boolean test=true;
 
 	public static void main(String[] args) throws IOException 
 	{
-		String pathname="./data/offside/Test.in";
-		if(test) br=new BufferedReader(new FileReader(new File(pathname)));
+		if(test) br=new BufferedReader(new FileReader(new File("./data/offsideTest.in")));
 		else br=new BufferedReader(new InputStreamReader(System.in));
+		
 		solucionarProblema();
+		
+		br.close();
 	}
 
 	private static void solucionarProblema() throws IOException 
