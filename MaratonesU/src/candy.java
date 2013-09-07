@@ -9,12 +9,8 @@ public class candy
 	private static boolean test=true;
 	private static BufferedReader br;
 
-	private static candy yo;
-
 	public static void main(String[] args) throws Exception
 	{
-		yo=new candy();
-
 		if(test)br=new BufferedReader(new FileReader(new File("./data/candyTest.in")));
 		else br=new BufferedReader(new InputStreamReader(System.in));
 		
