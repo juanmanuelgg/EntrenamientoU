@@ -52,11 +52,13 @@ public interface IProbaEst
 	//3. Bernoulli.
 	//4. Binomial.
 	
-	double probBinomial(double[] datos);
+	double probBinomial(int x, int n, double p);
 
-	double esperadoBinomial(double p);
+	double esperadoBinomial(double p, int n);
 
 	double varianzaBinomial(double p);
+
+	double varianzaBinomial(double p, int n);
 	
 	//5. Geometrica.
 	//6. Binomial Negativa.

@@ -128,6 +128,7 @@ public class ProbabilidadYEstadistica1 implements IProbaEst
 		return rta/k;
 	}
 
+	//2. Hipergeometrica.
 	@Override
 	public double probHiperGeom(double[] datos)
 	{
@@ -149,19 +150,39 @@ public class ProbabilidadYEstadistica1 implements IProbaEst
 		return 0;
 	}
 	
-	//2. Hipergeometrica.
 	//3. Bernoulli.
-
+	public double probBernoulli(double p, int x)
+	{
+		return Math.pow(p, x)*Math.pow((1-p),(1-x));
+	}
+	
+	public double varianzaBernoulli(double p)
+	{
+		return p*(1-p);
+	}
+	
+	public double esperadoBernoulli(double p)
+	{
+		return p;
+	}
+	//4. Binomial.
 	@Override
-	public double probBinomial(double[] datos) {
+	public double probBinomial(int x, int n, double p)
+	{
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public double esperadoBinomial(double p) {
-		// TODO Auto-generated method stub
-		return 0;
+	public double esperadoBinomial(double p, int n) 
+	{
+		return n*p;
+	}
+
+	@Override
+	public double varianzaBinomial(double p, int n)
+	{
+		return (n*p)*(1-p);
 	}
 
 	@Override
@@ -170,7 +191,6 @@ public class ProbabilidadYEstadistica1 implements IProbaEst
 		return 0;
 	}
 	
-	//4. Binomial.
 	//5. Geometrica.
 	//6. Binomial Negativa.
 	//7. POISSON.

@@ -3,10 +3,11 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.Set;
 
 public class playingWhitWheels 
@@ -18,12 +19,16 @@ public class playingWhitWheels
 	{
 		if(test)br=new BufferedReader(new FileReader(new File("./data/playingWhitWheelsTest.in")));
 		else br=new BufferedReader(new InputStreamReader(System.in));
+		
 		solucionarProblema();
+	
+		br.close();
 	}
 
 	private static void solucionarProblema() throws IOException 
 	{
-		ArrayList<Integer>[]grafo=preprocesarGrafo();
+		LinkedHashSet<Integer>[]grfAdj=preprocesarGrafo();
+		for (int i = 0; i < grfAdj.length; i++) System.out.println(i+" "+grfAdj[i]);
 
 		int casos = Integer.parseInt(br.readLine());
 		for (int i = 0; i < casos; i++)
@@ -41,7 +46,7 @@ public class playingWhitWheels
 				prohibidas.add(aux);
 			}
 
-			String rta = solucionarCaso(initial,target,prohibidas,grafo);
+			String rta = solucionarCaso(initial,target,prohibidas,grfAdj);
 
 			if(!(i==casos-1))br.readLine();
 
@@ -51,12 +56,12 @@ public class playingWhitWheels
 			System.out.print(rta);
 		}
 	}
-
+	
 	@SuppressWarnings("unchecked")
-	private static ArrayList<Integer>[] preprocesarGrafo()
+	private static LinkedHashSet<Integer>[] preprocesarGrafo()
 	{
-		ArrayList<Integer>[] adj = (ArrayList<Integer>[])new ArrayList[10000];
-		for (int i = 0; i < adj.length; i++) adj[i]=new ArrayList<Integer>();
+		LinkedHashSet<Integer>[] adj = (LinkedHashSet<Integer>[])new LinkedHashSet[10000];
+		for (int i = 0; i < adj.length; i++) adj[i]=new LinkedHashSet<Integer>();
 
 		for (int actual=0; actual<10000; actual++)
 		{
@@ -66,32 +71,46 @@ public class playingWhitWheels
 			for (int k = 0; k < 4; k++)
 			{
 				char temp=aux[k];
-				for (int j = 0; j < 10; j++)
-				{
-					aux[k]=(j+"").toCharArray()[0];
-					int variacion=Integer.parseInt(new String(aux));
-					if(actual!=variacion)
-					{
-						adj[actual].add(variacion);
-						adj[variacion].add(actual);
-					}
-				}
+
+				int izq=(temp=='0')?9:(temp-'0')-1;
+				int der=(temp=='9')?0:(temp-'0')+1;
+
+				aux[k]=(izq+"").toCharArray()[0];
+				int variacion=Integer.parseInt(new String(aux));
+				adj[actual].add(variacion);
+				
+				aux[k]=(der+"").toCharArray()[0];
+				variacion=Integer.parseInt(new String(aux));
+				adj[actual].add(variacion);
+				
 				aux[k]=temp;
 			}
 		}
 		return adj;
 	}
 
-	/**Dijkstra */
-	private static String solucionarCaso(int initial, int target, Set<Integer> prohibidas, ArrayList<Integer>[] grafo) 
+	/**DFS */
+	private static String solucionarCaso(int initial, int target, Set<Integer> prohibidas, HashSet<Integer>[] grfAdj) 
 	{
 		double[] distTo = new double[10000];
-        int[] edgeTo = new int[10000];
-        
-        Arrays.fill(distTo, Double.POSITIVE_INFINITY);
-        Arrays.fill(edgeTo, -1);
-        
-        PriorityQueue<E>
-		return "XX";
+		Arrays.fill(distTo, -1);
+
+		distTo[initial]=0;
+		Queue<Integer> q=new PriorityQueue<Integer>();
+		q.add(initial);
+
+		while (!q.isEmpty())
+		{
+			int v=q.poll();
+			for (int w: grfAdj[v])
+			{
+				if(!prohibidas.contains(w) && distTo[w]==-1)
+				{
+					distTo[w]=distTo[v]+1;
+					q.add(w);
+				}
+			}
+		}
+		return (int)distTo[target]+"";
 	}
 }
