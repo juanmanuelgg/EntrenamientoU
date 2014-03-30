@@ -9,8 +9,6 @@ import java.util.Queue;
 
 public class bicoloringBFS 
 {
-	private static final String LINEAFINAL = "0";
-
 	private static boolean test = false;
 	private static BufferedReader br;
 
@@ -28,7 +26,7 @@ public class bicoloringBFS
 	private static void solucionarProblema() throws Exception 
 	{
 		String line=br.readLine();
-		while(!LINEAFINAL.equals(line))
+		while(!line.equals("0"))
 		{
 			//Separar informacion pertinente(Usando line)
 			int numvetices=Integer.parseInt(line);
